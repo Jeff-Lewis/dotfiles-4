@@ -182,7 +182,11 @@ clone_dotfiles() {
     git clone git@github.com:ryanjohnston/dotfiles.git ~/.dotfiles
     success "cloned git@github.com:ryanjohnston/dotfiles.git"
   else
-    success "skipped git clone - folder exists"
+    success "skipped git clone - folder exists."
+    info "updating git repo"
+    pushd ~/.dotfiles
+    git pull
+    popd
   fi
 }
 
