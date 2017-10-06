@@ -1,7 +1,6 @@
-Mac software needed
+# Ryan's Dot Files
 
-git
-zsh
-gpg
-gpg-agent
-pinentry-mac
+## Inspiration
+
+- [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github)
+- [holman/dotfiles](https://github.com/holman/dotfiles)
