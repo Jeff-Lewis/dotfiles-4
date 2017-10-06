@@ -164,7 +164,7 @@ install_dotfiles () {
 
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
   do
-    info $src 
+    info $src
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
@@ -185,6 +185,8 @@ clone_dotfiles() {
     success "skipped git clone - folder exists"
   fi
 }
+
+#-------------------------------------------------------------
 
 info 'updating dotfiles repo...'
 clone_dotfiles
