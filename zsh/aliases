@@ -1,0 +1,6 @@
+
+alias edit='docker run -ti --rm -v $(pwd):/home/developer/workspace jare/vim-bundle'
+
+alias rm='/usr/local/bin/rmtrash'
+
+alias lynx='dev docker run -it --rm --name lynx jess/lynx'
