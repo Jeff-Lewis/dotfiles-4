@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 jenkins () {
-  docker run -d \
+  docker \
+    --tlsverify \
+    run -d \
     --rm -it \
     --tlsverify \
     -H sayer.ryanj.org:2376 \
