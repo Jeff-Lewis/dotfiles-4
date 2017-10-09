@@ -11,5 +11,6 @@ antigen bundle zsh-users/zsh-completions
 # source $HOME/.gpg.zsh
 
 source $HOME/.dotfiles/git/aliases
+source $HOME/.dotfiles/docker/functions
 
 antigen apply

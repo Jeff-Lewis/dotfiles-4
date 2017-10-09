@@ -2,7 +2,7 @@
 
 set -e
 
-source 'scripts/common.sh'
+source 'script/common.sh'
 
 OLD_GITCONFIG="git/gitconfig.local.symlink"
 

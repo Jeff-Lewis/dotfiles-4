@@ -18,7 +18,7 @@ set -e
 
 echo ''
 
-source scripts/common.sh
+source script/common.sh
 
 install_zsh () {
   rm -rf $HOME/.antigen
