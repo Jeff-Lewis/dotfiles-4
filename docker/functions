@@ -4,7 +4,8 @@ jenkins () {
   docker \
     --tlsverify \
     -H sayer.ryanj.org:2376 \
-    run -d --rm \
+    run -d \
+    --restart always \
     -p 8080:8080 \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --mount source=jenkins,target=/var/jenkins_home \
