@@ -7,9 +7,7 @@ antigen bundle gpg-agent
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
-# source $HOME/.aliases.zsh
-# source $HOME/.gpg.zsh
-
+source $HOME/.dotfiles/zsh/aliases
 source $HOME/.dotfiles/git/aliases
 source $HOME/.dotfiles/docker/functions
 
