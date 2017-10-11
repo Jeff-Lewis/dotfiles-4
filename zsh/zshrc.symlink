@@ -24,6 +24,9 @@ antigen bundle zsh-users/zsh-completions
 antigen theme ys
 #antigen theme dracula/zsh dracula
 
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
+
 antigen apply
 
 [ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
