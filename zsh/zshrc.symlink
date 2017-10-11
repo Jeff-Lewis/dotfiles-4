@@ -1,20 +1,35 @@
+#
+# https://github.com/zsh-users/antigen
+#
 source $HOME/.antigen/antigen.zsh
 
 export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 
 antigen use oh-my-zsh
 
+if [ "$OSTYPE"="darwin17.0.0" ]; then                   # load only if on high sierra
+  antigen bundle osx
+fi
+
 antigen bundle git
 antigen bundle git-prompt
 antigen bundle gpg-agent
 antigen bundle ssh-agent
+antigen bundle common-aliases
+antigen bundle history
+
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
-source $HOME/.dotfiles/zsh/secret
-source $HOME/.dotfiles/zsh/aliases
-source $HOME/.dotfiles/gnupg/aliases
-source $HOME/.dotfiles/git/aliases
-source $HOME/.dotfiles/docker/functions
+antigen theme ys
+#antigen theme dracula/zsh dracula
 
 antigen apply
+
+setopt correc
+
+[ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
+source $HOME/.dotfiles/zsh/aliases                    # Custom ZSH aliases
+source $HOME/.dotfiles/gnupg/aliases                  # GPG aliases
+source $HOME/.dotfiles/git/aliases                    # GIT aliases
+source $HOME/.dotfiles/docker/functions               # Docker functions
