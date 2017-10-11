@@ -1,0 +1,12 @@
+#
+# Aliases to help with GPG
+#
+
+# List keys in the current agent.
+alias keys="gpg --list-secret-keys --keyid-format LONG"
+
+# Print the public key to the terminal.
+alias publickey="keybase pgp export -q 7DF2891B17435099"
+
+# Print the private key to the terminal. Requires pass-phrase.
+alias privatekey="keybase pgp export -q 7DF2891B17435099 --secret"

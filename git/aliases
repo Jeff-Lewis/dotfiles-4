@@ -1,3 +1,7 @@
 
-# Fancy git log viewing
+# Fancy git log viewing.
 alias glog="git log --oneline --decorate --all --graph"
+
+# Configure GPG program for GIT to use.
+git config --global gpg.program $(which gpg)
+
