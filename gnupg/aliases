@@ -10,3 +10,9 @@ alias publickey="keybase pgp export -q 7DF2891B17435099"
 
 # Print the private key to the terminal. Requires pass-phrase.
 alias privatekey="keybase pgp export -q 7DF2891B17435099 --secret"
+
+# Symmetric encrypt a file
+alias ec="gpg --symmetric $1"
+
+# Decrypt a file
+alias dc="gpg --output $1 --decrypt $2"

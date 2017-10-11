@@ -1,0 +1,16 @@
+XTerm*foreground: white
+XTerm*background: black
+
+*VT100.translations: #override  Meta <KeyPress> V:  insert-selection(PRIMARY, CUT_BUFFER0) \n
+
+Cmdtool.MaxLofFileSize:         1000000
+Mouse.Multiclick.Space:         10
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.autohint:   true
+Xft.rgba:       rgb
+Xft.hintstyle:  hintfull
+
+XTerm*faceName: Mono
+*faceName: Mono

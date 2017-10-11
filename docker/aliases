@@ -1,0 +1,8 @@
+
+conduct() {
+  docker run -it --rm \
+    --name conduct \
+    -v "$PWD":/workdir \
+    -w /workdir
+    ryanj/conduct
+}

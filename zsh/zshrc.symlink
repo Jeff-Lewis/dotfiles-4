@@ -5,7 +5,7 @@
 # Additional Resources:
 #
 # - https://github.com/zsh-users/antigen
-#
+# - http://www.zsh.org
 
 export DEFAULT_USER="ryanjohnston"
 export VISUAL=vim
@@ -22,36 +22,26 @@ export EDITOR='vim'
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-if [ "$OSTYPE"="darwin17.0.0" ];                    
+if [ "$OSTYPE"="darwin17.0.0" ];
 then
   source /usr/local/share/antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
-  antigen bundle osx
-  antigen bundle iterm-tab-colors
 fi
-
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle git-prompt
-antigen bundle gpg-agent
-antigen bundle ssh-agent
-antigen bundle common-aliases
-antigen bundle history
-antigen bundle zsh_reload
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
-
-antigen theme ys
-# antigen theme dracula/zsh dracula
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
 
+antigen theme dracula/dracula-theme
+
 antigen apply
 
 [ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
+[ -e "${HOME}/.dotfiles/docker/aliases" ] && source $HOME/.dotfiles/docker/aliases
 source $HOME/.dotfiles/zsh/aliases                    # Custom ZSH aliases
 source $HOME/.dotfiles/gnupg/aliases                  # GPG aliases
 source $HOME/.dotfiles/git/aliases                    # GIT aliases

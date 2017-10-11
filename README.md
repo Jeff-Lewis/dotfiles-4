@@ -1,5 +1,15 @@
 # Ryan's Dot Files
 
+## Overviews
+
+# Hyper.js
+- [Hyper.js Home](https://hyper.is/)
+- [Awesome Hyper](https://github.com/bnb/awesome-hyper)
+
+# ZSH
+- [Awesome ZSH Plugins](https://github.com/unixorn/awesome-zsh-plugins)
+- [GitHub Topic:ZSH](https://github.com/search?utf8=%E2%9C%93&q=topic%3Azsh&type=)
+
 ## Commands
 
 **GNUPG**
@@ -7,6 +17,8 @@
 - ``keys`` - List GPG keys in gpg-agent
 - ``publickey`` - Display public key in the console.
 - ``privatekey`` - Display private key in the console.
+- ``ec`` - Symmetric encrypt a file. Example: ec myfile.txt
+- ``dc`` - Decrypt a file. Example: dc [ecnrypted file] [output]
 
 **GIT**
 - ``git lg`` - Display GIT history as tree graph.
