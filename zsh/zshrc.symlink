@@ -1,5 +1,7 @@
 source $HOME/.antigen/antigen.zsh
 
+export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+
 antigen use oh-my-zsh
 
 antigen bundle git
@@ -9,6 +11,7 @@ antigen bundle ssh-agent
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
+source $HOME/.dotfiles/zsh/secret
 source $HOME/.dotfiles/zsh/aliases
 source $HOME/.dotfiles/gnupg/aliases
 source $HOME/.dotfiles/git/aliases

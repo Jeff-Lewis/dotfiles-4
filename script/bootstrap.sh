@@ -21,11 +21,7 @@ echo ''
 source script/common.sh
 
 install_zsh () {
-  rm -rf $HOME/.antigen
-  mkdir $HOME/.antigen
-  cp antigen/bin/antigen.zsh $HOME/.antigen/antigen.zsh
-  cp .zshrc $HOME/.zshrc
-  cp .aliases.zsh $HOME/.aliases.zsh
+  cp zsh/secret $HOME/.dotfiles/zsh/secret
 }
 
 setup_gitconfig() {
@@ -183,6 +179,9 @@ setup_gitconfig
 
 info 'installing dotfiles...'
 install_dotfiles
+
+info 'adding custom zsh info...'
+install_zsh
 
 # If we're on a Mac, let's install and setup homebrew.
 
