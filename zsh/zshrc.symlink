@@ -9,7 +9,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
 source $HOME/.dotfiles/zsh/aliases
-source $HOME/.dotfiles/gpg/aliases
+source $HOME/.dotfiles/gnupg/aliases
 source $HOME/.dotfiles/git/aliases
 source $HOME/.dotfiles/docker/functions
 
