@@ -1,6 +1,35 @@
 
+# Customized VIM in docker container
 alias edit='docker run -ti --rm -v $(pwd):/home/developer/workspace jare/vim-bundle'
 
-alias rm='/usr/local/bin/rmtrash'
+# Use rmtrash instead of rm. macos only.
+# alias rm='/usr/local/bin/rmtrash'
 
+# Lynx in a docker container
 alias lynx='dev docker run -it --rm --name lynx jess/lynx'
+
+# Find public IP address.
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
+# Find out the biggest users of memory.
+alias hogs="ps aux | sort -nk +4 | tail"
+
+alias online="lsof -P -i -n"
+
+# List bigest files in current directory.
+alias big="du -s * | sort -n | tail"
+
+# Display the weather in Calgary
+alias yyc="curl wttr.in/calgary"
+
+# Sniff network traffic.
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+
+# Create a mirror of a website.
+alias mirror='f() { wget --random-wait -r -p -o $HOME/wget_log.txt -e robots=off -U mozilla $1 };f'
+
+# Kill chrome tabs.
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Reload zshrc config
+alias reload="exec $SHELL -l"

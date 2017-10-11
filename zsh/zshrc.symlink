@@ -1,15 +1,36 @@
+# ZSH dotfile
 #
-# https://github.com/zsh-users/antigen
+# For MacOS, we assume that antigen has been installed via homebrew.
 #
-source $HOME/.antigen/antigen.zsh
+# Additional Resources:
+#
+# - https://github.com/zsh-users/antigen
+#
 
-export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+export DEFAULT_USER="ryanjohnston"
+export VISUAL=vim
+export ORGANIZATION="Bespoke View Consulting, Inc."
+export MANPATH="/usr/local/man:$MANPATH"
+export LANG=en_US.UTF-8
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+export TERM="xterm-256color"
+export AWS_CONFIG_FILE="$HOME/.aws/config"
+export AUTOSSH_PORT=20000
+export AUTOSSH_GATETIME=0
+export FONT="Droid Sans Mono for Powerline Regular"
+export EDITOR='vim'
+export COMPLETION_WAITING_DOTS="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+if [ "$OSTYPE"="darwin17.0.0" ];                    
+then
+  source /usr/local/share/antigen/antigen.zsh
+  export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+  antigen bundle osx
+  antigen bundle iterm-tab-colors
+fi
 
 antigen use oh-my-zsh
-
-if [ "$OSTYPE"="darwin17.0.0" ]; then                   # load only if on high sierra
-  antigen bundle osx
-fi
 
 antigen bundle git
 antigen bundle git-prompt
@@ -23,7 +44,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 
 antigen theme ys
-#antigen theme dracula/zsh dracula
+# antigen theme dracula/zsh dracula
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
