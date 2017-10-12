@@ -42,6 +42,7 @@ antigen apply
 
 [ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
 [ -e "${HOME}/.dotfiles/docker/aliases" ] && source $HOME/.dotfiles/docker/aliases
+
 source $HOME/.dotfiles/zsh/aliases                    # Custom ZSH aliases
 source $HOME/.dotfiles/gnupg/aliases                  # GPG aliases
 source $HOME/.dotfiles/git/aliases                    # GIT aliases

@@ -1,8 +1,50 @@
+#!/usr/bin/env zsh
+
+alpine() {
+  docker run -it --rm \
+    --name alpine \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    alpine:latest "$@"
+}
+
+node() {
+  docker run -it --rm \
+    --name node \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    node:latest "$@"
+}
+
+npm() {
+  docker run -it --rm \
+    --name node \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    node:latest npm "$@"
+}
 
 conduct() {
   docker run -it --rm \
     --name conduct \
     -v "$PWD":/workdir \
-    -w /workdir
-    ryanj/conduct
+    -w /workdir \
+    ryanj/conduct "$@"
 }
+
+hpm() {
+  docker run -it --rm \
+    --name hpm \
+    -v "$HOME":/root \
+    -w /root \
+    ryanj/hpm "$@"
+}
+
+composer() {
+  docker run -t --rm \
+    -v $(pwd):/app \
+    -v ~/.ssh:/root/.ssh \
+    -w /app \
+    composer/composer $@
+}
+

@@ -13,6 +13,7 @@
 cd "$(dirname "$0")/.."
 
 DOTFILES_ROOT=$(pwd -P)
+# DOTFILES_ROOT="~/.dotfiles"
 
 set -e
 
@@ -20,8 +21,8 @@ echo ''
 
 source script/common.sh
 
-install_zsh () {
-  cp zsh/secret $HOME/.dotfiles/zsh/secret
+install_hyper() {
+  cp -a hyper/hyper.js $HOME/.hyper.js
 }
 
 setup_gitconfig() {
@@ -131,6 +132,7 @@ link_file () {
 
   if [ "$skip" != "true" ]  # "false" or empty
   then
+    # /Users/ryanjohnston/.dotfiles/./zsh/zshrc.symlink
     ln -s "$1" "$2"
     success "linked $1 to $2"
   fi
@@ -181,8 +183,8 @@ setup_gitconfig
 info 'installing dotfiles...'
 install_dotfiles
 
-info 'adding custom zsh info...'
-install_zsh
+info 'adding hyper.js config file...'
+install_hyper
 
 # If we're on a Mac, let's install and setup homebrew.
 
