@@ -1,5 +1,17 @@
 #!/usr/bin/env zsh
 
+jenkins() {
+  docker -H sayer.ryanj.org:2376 \
+    --tlsverify \
+    run -d \
+    --restart always \
+    --name myjenkins \
+    -p 8080:8080 \
+    -p 50000:50000 \
+    --mount source=jenkins,target=/var/jenkins_home \
+    getintodevops/jenkins-withdocker
+}
+
 alpine() {
   docker run -it --rm \
     --name alpine \
@@ -14,6 +26,14 @@ node() {
     -v $(pwd):/workdir \
     -w /workdir \
     node:latest "$@"
+}
+
+curl() {
+  docker run -it --rm \
+    --name node \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    ryanjohnston/curl "$@"
 }
 
 npm() {
