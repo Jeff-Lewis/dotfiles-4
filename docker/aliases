@@ -12,6 +12,14 @@ jenkins() {
     getintodevops/jenkins-withdocker
 }
 
+certstrap() {
+  docker run -it --rm \
+    --name certstrap \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    ryanjohnston/certstrap "$@"
+}
+
 alpine() {
   docker run -it --rm \
     --name alpine \
@@ -41,7 +49,7 @@ npm() {
     --name node \
     -v $(pwd):/workdir \
     -w /workdir \
-    node:latest npm "$@"
+    ryanjohnston/node npm "$@"
 }
 
 conduct() {
@@ -49,7 +57,7 @@ conduct() {
     --name conduct \
     -v "$PWD":/workdir \
     -w /workdir \
-    ryanj/conduct "$@"
+    ryanjohnston/conduct "$@"
 }
 
 hpm() {
@@ -57,7 +65,7 @@ hpm() {
     --name hpm \
     -v "$HOME":/root \
     -w /root \
-    ryanj/hpm "$@"
+    ryanjohnston/hpm "$@"
 }
 
 composer() {
