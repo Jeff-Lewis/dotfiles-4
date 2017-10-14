@@ -1,78 +1,88 @@
 #!/usr/bin/env zsh
+#
+# Wrappers for my docker commands
+#
+
+export DOCKER_REPO_PREFIX=ryanjohnston
+export REMOTE_ONE=sayer.ryanj.org:2376
+export REMOTE_TWO=maeve.ryanj.org:2376
+export DOCKER_UID=501
+export DOCKER_GID=1000
+
+#
+# HELPER FUNCTIONS
+#
+
+dcleanup(){
+	local containers
+	containers=( $(docker ps -aq 2>/dev/null) )
+	docker rm "${containers[@]}" 2>/dev/null
+#	local volumes
+#	volumes=( $(docker ps --filter status=exited -q 2>/dev/null) )
+#	docker rm -v "${volumes[@]}" 2>/dev/null
+	local images
+	images=( $(docker images --filter dangling=true -q 2>/dev/null) )
+	docker rmi "${images[@]}" 2>/dev/null
+}
+
+del_stopped(){
+	local name=$1
+	local state
+	state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+	if [[ "$state" == "false" ]]; then
+		docker rm "$name"
+	fi
+}
+
+#
+# CONTAINERS
+#
 
 jenkins() {
-  docker -H sayer.ryanj.org:2376 \
-    --tlsverify \
-    run -d \
-    --restart always \
-    --name myjenkins \
-    -p 8080:8080 \
-    -p 50000:50000 \
-    --mount source=jenkins,target=/var/jenkins_home \
-    getintodevops/jenkins-withdocker
+  docker -H ${REMOTE_ONE} --tlsverify \
+        run -d --restart always --name myjenkins -p 8080:8080 -p 50000:50000 \
+        --mount source=jenkins,target=/var/jenkins_home getintodevops/jenkins-withdocker
+}
+
+base() {
+  docker run -it --rm --name base -v $(pwd):/workdir -w /workdir -u root \
+  ${DOCKER_REPO_PREFIX}/base "$@"
 }
 
 certstrap() {
-  docker run -it --rm \
-    --name certstrap \
-    -v $(pwd):/workdir \
-    -w /workdir \
-    ryanjohnston/certstrap "$@"
+  docker run -it --rm --name certstrap -v $(pwd):/workdir -w /workdir \
+  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/certstrap "$@"
 }
 
 alpine() {
-  docker run -it --rm \
-    --name alpine \
-    -v $(pwd):/workdir \
-    -w /workdir \
-    alpine:latest "$@"
+  docker run -it --rm --name alpine -v $(pwd):/workdir -w /workdir alpine:latest "$@"
 }
 
 node() {
-  docker run -it --rm \
-    --name node \
-    -v $(pwd):/workdir \
-    -w /workdir \
-    node:latest "$@"
+  docker run -it --rm --name node -v $(pwd):/workdir -w /workdir \
+  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/node node "$@"
 }
 
 curl() {
-  docker run -it --rm \
-    --name node \
-    -v $(pwd):/workdir \
-    -w /workdir \
-    ryanjohnston/curl "$@"
+  docker run -it --rm --name node -v $(pwd):/workdir -w /workdir \
+  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/curl "$@"
 }
 
 npm() {
-  docker run -it --rm \
-    --name node \
-    -v $(pwd):/workdir \
-    -w /workdir \
-    ryanjohnston/node npm "$@"
+  docker run -it --rm --name node -v $(pwd):/workdir -w /workdir \
+  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/node npm "$@"
 }
 
 conduct() {
-  docker run -it --rm \
-    --name conduct \
-    -v "$PWD":/workdir \
-    -w /workdir \
-    ryanjohnston/conduct "$@"
+  docker run -it --rm --name conduct -v $(pwd):/workdir -w /workdir \
+  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/conduct "$@"
 }
 
 hpm() {
-  docker run -it --rm \
-    --name hpm \
-    -v "$HOME":/root \
-    -w /root \
-    ryanjohnston/hpm "$@"
+  docker run -it --rm --name hpm -v $(echo ~):/root -w /root ${DOCKER_REPO_PREFIX}/hpm "$@"
 }
 
 composer() {
-  docker run -t --rm \
-    -v $(pwd):/app \
-    -v ~/.ssh:/root/.ssh \
-    -w /app \
-    composer/composer $@
+  docker run -it --rm --name composer -v $(pwd):/workdir -v ~/.ssh:/root/.ssh -w /workdir composer/composer "$@"
 }
 

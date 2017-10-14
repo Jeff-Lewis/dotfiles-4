@@ -1,16 +1,32 @@
 # Ryan's Dot Files
 
-## Overviews
+Please note that this project is released with a [Contributor Code of Conduct](code-of-conduct.md). By participating in this project you agree to abide by its terms.
+
+## Applications Overview
 
 # Hyper.js
+
 - [Hyper.js Home](https://hyper.is/)
 - [Awesome Hyper](https://github.com/bnb/awesome-hyper)
 
 # ZSH
+
 - [Awesome ZSH Plugins](https://github.com/unixorn/awesome-zsh-plugins)
 - [GitHub Topic:ZSH](https://github.com/search?utf8=%E2%9C%93&q=topic%3Azsh&type=)
 
 ## Commands
+
+**DOCKER CONTAINERS AND COMMANDS**
+
+- ``dcleanup`` - Remove all containers and images that are currently not used.
+- ``del_stopped`` - If a container is currently stopped, delete it before starting new one.
+- ``jenkins`` - Launches Jenkins server on remote Docker host (AWS for me).
+- ``base`` - My customized base image based on Debian Stretch.
+- ``alpine`` - Lightweight experiments.
+- ``node`` - My Node container.
+- ``curl`` - CURL application on Debian Stretch.
+- ``npm`` - NPM from my Node container.
+- ``composer`` - PHP composer application.
 
 **GNUPG**
 
