@@ -26,15 +26,17 @@ export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # MacOS High Sierra
-if [ "$OSTYPE"=="darwin17.0.0" ];
+if [[ "${OSTYPE}" == "darwin17.0.0" ]]
 then
+  echo "${OSTYPE}"
   source /usr/local/share/antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 fi
 
 # Raspbian Stretch
-if [ "$OSTYPE"=="linux" ];
+if [[ "${OSTYPE}" == "linux" ]]
 then
+  echo "${OSTYPE}"
   source /usr/local/share/antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 fi
