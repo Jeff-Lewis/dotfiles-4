@@ -24,6 +24,7 @@ export FONT="Droid Sans Mono for Powerline Regular"
 export EDITOR='vim'
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
+export OSTYPE
 
 # MacOS High Sierra
 if [[ "${OSTYPE}" == "darwin17.0.0" ]]
@@ -31,34 +32,32 @@ then
   echo "${OSTYPE}"
   source /usr/local/share/antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+  antigen bundle zsh-users/zsh-completions
+  antigen bundle zsh-users/zsh-autosuggestions
+  antigen bundle zsh-users/zsh-history-substring-search
+  zstyle :omz:plugins:ssh-agent agent-forwarding on
+  zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
+  antigen theme dracula/dracula-theme
 fi
 
 # Raspbian Stretch
-if [[ "${OSTYPE}" == "linux" ]]
+if [[ "${OSTYPE}" == "linux-gnueabihf" ]]
 then
   echo "${OSTYPE}"
-  source /usr/local/share/antigen/antigen.zsh
+  source /usr/share/zsh-antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+  GPG_TTY=$(tty)
+  export GPG_TTY
 fi
 
-# Ubuntu Xenial
-
+# All OS's get these ZSH modules
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search
-
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
-
-antigen theme dracula/dracula-theme
-
 antigen apply
 
-[ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
-[ -e "${HOME}/.dotfiles/docker/aliases" ] && source $HOME/.dotfiles/docker/aliases
+# [ -e "${HOME}/.dotfiles/zsh/secret" ] && source $HOME/.dotfiles/zsh/secret
+# [ -e "${HOME}/.dotfiles/docker/aliases" ] && source $HOME/.dotfiles/docker/aliases
 
-source $HOME/.dotfiles/zsh/aliases                    # Custom ZSH aliases
-source $HOME/.dotfiles/gnupg/aliases                  # GPG aliases
-source $HOME/.dotfiles/git/aliases                    # GIT aliases
-source $HOME/.dotfiles/docker/functions               # Docker functions
+# source $HOME/.dotfiles/zsh/aliases                    # Custom ZSH aliases
+# source $HOME/.dotfiles/gnupg/aliases                  # GPG aliases
+# source $HOME/.dotfiles/git/aliases                    # GIT aliases
+# source $HOME/.dotfiles/docker/functions               # Docker functions
