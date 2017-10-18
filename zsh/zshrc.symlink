@@ -1,12 +1,15 @@
 # ZSH dotfile
 #
 # For MacOS, we assume that antigen has been installed via homebrew.
-#
+# For Debian, install zsh-antigen package.
+
 # Additional Resources:
 #
 # - https://github.com/zsh-users/antigen
 # - http://www.zsh.org
+#
 
+export GPG_KEY="7DF2891B17435099"
 export DEFAULT_USER="ryanjohnston"
 export VISUAL=vim
 export ORGANIZATION="Bespoke View Consulting, Inc."
@@ -22,11 +25,21 @@ export EDITOR='vim'
 export COMPLETION_WAITING_DOTS="true"
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-if [ "$OSTYPE"="darwin17.0.0" ];
+# MacOS High Sierra
+if [ "$OSTYPE"=="darwin17.0.0" ];
 then
   source /usr/local/share/antigen/antigen.zsh
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 fi
+
+# Raspbian Stretch
+if [ "$OSTYPE"=="linux" ];
+then
+  source /usr/local/share/antigen/antigen.zsh
+  export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
+fi
+
+# Ubuntu Xenial
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
