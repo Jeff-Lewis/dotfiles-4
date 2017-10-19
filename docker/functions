@@ -1,14 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-jenkins () {
-  docker \
-    --tlsverify \
-    -H sayer.ryanj.org:2376 \
-    run -d \
-    --restart always \
-    -p 8080:8080 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    --mount source=jenkins,target=/var/jenkins_home \
-    --name jenkins \
-    getintodevops/jenkins-withdocker:lts
+export DOCKER_REPO_PREFIX=ryanjohnston
+export REMOTE_ONE=sayer.ryanj.org:2376
+export REMOTE_TWO=maeve.ryanj.org:2376
+export DOCKER_UID=501
+export DOCKER_GID=1000
+
+#
+# HELPER FUNCTIONS
+#
+
+dcleanup(){
+	local containers
+	containers=( $(docker ps -aq 2>/dev/null) )
+	docker rm "${containers[@]}" 2>/dev/null
+	local volumes
+	volumes=( $(docker ps --filter status=exited -q 2>/dev/null) )
+	docker rm -v "${volumes[@]}" 2>/dev/null
+	local images
+	images=( $(docker images --filter dangling=true -q 2>/dev/null) )
+	docker rmi "${images[@]}" 2>/dev/null
+}
+
+dstopped(){
+	local name=$1
+	local state
+	state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+	if [[ "$state" == "false" ]]; then
+		docker rm "$name"
+	fi
 }

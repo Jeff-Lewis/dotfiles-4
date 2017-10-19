@@ -10,38 +10,27 @@ export DOCKER_UID=501
 export DOCKER_GID=1000
 
 #
-# HELPER FUNCTIONS
-#
-
-dcleanup(){
-	local containers
-	containers=( $(docker ps -aq 2>/dev/null) )
-	docker rm "${containers[@]}" 2>/dev/null
-	local volumes
-	volumes=( $(docker ps --filter status=exited -q 2>/dev/null) )
-	docker rm -v "${volumes[@]}" 2>/dev/null
-	local images
-	images=( $(docker images --filter dangling=true -q 2>/dev/null) )
-	docker rmi "${images[@]}" 2>/dev/null
-}
-
-del_stopped(){
-	local name=$1
-	local state
-	state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
-	if [[ "$state" == "false" ]]; then
-		docker rm "$name"
-	fi
-}
-
-#
 # CONTAINERS
 #
 
+telnet() {
+  docker run -it --rm \
+    --name telnet \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    alpine:latest \
+    /usr/bin/telnet "$@"
+}
+
 jenkins() {
-  docker -H ${REMOTE_ONE} --tlsverify \
-        run -d --restart always --name myjenkins -p 8080:8080 -p 50000:50000 \
-        --mount source=jenkins,target=/var/jenkins_home getintodevops/jenkins-withdocker
+  docker -H ${REMOTE_ONE} \
+    --tlsverify \
+    run -d --restart always \
+    --name jenkins \
+    -p 8080:8080 \
+    -p 50000:50000 \
+    --mount source=jenkins,target=/var/jenkins_home \
+    ryanjohnston/jenkins
 }
 
 base() {
@@ -74,8 +63,13 @@ npm() {
 }
 
 conduct() {
-  docker run -it --rm --name conduct -v $(pwd):/workdir -w /workdir \
-  -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/conduct "$@"
+  docker run -it \
+    --rm \
+    --name conduct \
+    -v $(pwd):/workdir \
+    -w /workdir \
+    ${DOCKER_REPO_PREFIX}/conduct "$@"
+
 }
 
 hpm() {
