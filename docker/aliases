@@ -33,6 +33,18 @@ jenkins() {
     ryanjohnston/jenkins
 }
 
+mysql-server () {
+  docker -H ${REMOTE_ONE} \
+    --tlsverify \
+    run -d \
+    -p 3306:3306 \
+    --name mysql-server \
+    --mount source=mysql,target=/var/lib/mysql \
+    -e MYSQL_ROOT_PASSWORD=dietcoke99 \
+    -e MYSQL_ROOT_HOST=172.17.0.1 \
+    mysql/mysql-server:5.6
+}
+
 base() {
   docker run -it --rm --name base -v $(pwd):/workdir -w /workdir \
   -u ${DOCKER_UID}:${DOCKER_GID} ${DOCKER_REPO_PREFIX}/base "$@"
