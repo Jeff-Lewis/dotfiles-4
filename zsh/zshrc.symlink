@@ -28,7 +28,7 @@ export OSTYPE
 
 # MacOS High Sierra
 
-if [[ "${OSTYPE}" == "darwin17.0.0" ]]
+if [[ "${OSTYPE}" =~ "darwin" ]]
 then
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 
