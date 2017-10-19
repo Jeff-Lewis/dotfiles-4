@@ -15,7 +15,7 @@ export VISUAL=vim
 export ORGANIZATION="Bespoke View Consulting, Inc."
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
-export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+export SSH_KEY_PATH="$HOME/.ssh/id_ed25519"
 export TERM="xterm-256color"
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 export AUTOSSH_PORT=20000
@@ -29,7 +29,7 @@ export OSTYPE
 # MacOS High Sierra
 
 if [[ "${OSTYPE}" =~ "darwin" ]]
-then
+ten
   export PATH=~/.dotfiles/bin:/usr/local/bin:$PATH
 
   # Mac specific aliases
@@ -43,7 +43,7 @@ then
   antigen bundle zsh-users/zsh-syntax-highlighting
 
   zstyle :omz:plugins:ssh-agent agent-forwarding on
-  zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa.imac
+  zstyle :omz:plugins:ssh-agent identities id_ed25519 id_rsa
 
   antigen theme dracula/dracula-theme
 fi

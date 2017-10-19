@@ -21,10 +21,6 @@ echo ''
 
 source script/common.sh
 
-install_hyper() {
-  cp -a hyper/hyper.js $HOME/.hyper.js
-}
-
 setup_gitconfig() {
   # Skip this if we already have a gitconfig file.
   if ! [ -f git/gitconfig.local.symlink ]
@@ -152,9 +148,8 @@ install_dotfiles () {
 }
 
 setup_gpg() {
-  cp .gpg.zsh $HOME/.gpg.zsh
-  cp -a .gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
-  cp -a .gnupg/gpg.conf $HOME/.gnupg/gpg.conf
+  cp -a gnupg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+  cp -a gnupg/gpg.conf $HOME/.gnupg/gpg.conf
 }
 
 clone_dotfiles() {
@@ -174,17 +169,22 @@ clone_dotfiles() {
 
 #-------------------------------------------------------------
 
+if [ "$(uname -s)" == "Darwin" ]
+then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
 info 'updating dotfiles repo...'
 clone_dotfiles
+
+info 'configuring gnupg...'
+setup_gpg
 
 info 'configuring git:'
 setup_gitconfig
 
 info 'installing dotfiles...'
 install_dotfiles
-
-info 'adding hyper.js config file...'
-install_hyper
 
 # If we're on a Mac, let's install and setup homebrew.
 
