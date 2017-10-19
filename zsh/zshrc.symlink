@@ -52,7 +52,9 @@ then
   # zstyle :omz:plugins:ssh-agent identities id_ed25519 id_rsa
 
   # antigen theme dracula/dracula-theme
-  antigen theme dieter
+  # antigen theme dieter
+  # antigen theme agnoster
+  antigen theme muse
 
   antigen apply
 fi
