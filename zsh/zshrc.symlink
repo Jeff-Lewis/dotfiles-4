@@ -53,8 +53,8 @@ then
 
   # antigen theme dracula/dracula-theme
   # antigen theme dieter
-  # antigen theme agnoster
-  antigen theme muse
+  antigen theme agnoster
+  # antigen theme muse
 
   antigen apply
 fi
